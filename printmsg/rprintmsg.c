@@ -5,7 +5,9 @@
 #include <stdlib.h>
 #include "msg.h"
 
-int main(int argc, char *argv[])
+int main (argc, argv)
+	int argc;
+	char *argv[];
 {
 	CLIENT *clnt;
 	int *result;
@@ -13,7 +15,7 @@ int main(int argc, char *argv[])
 	char *message;
 
 	if (argc != 3) {
-		fprintf(stderr, "usage: %s host	message\n", argv[0]);
+		fprintf(stderr, "usage: %s host message\n", argv[0]);
 		exit(1);
 	}
 
@@ -21,12 +23,12 @@ int main(int argc, char *argv[])
 	message = argv[2];
 	/*
 	 * Create client "handle" used for
-	 * calling MESSAGEPROC on the server
+	 * calling MESSAGEPROG on the server
 	 * designated on the command line.
 	 */
 	clnt = clnt_create(server, MESSAGEPROG,
 					PRINTMESSAGEVERS,
-					"visible");
+					"tcp");
 	if (clnt == (CLIENT *)NULL) {
 		/*
 		 * couldn't establish connection with
@@ -43,9 +45,9 @@ int main(int argc, char *argv[])
 	result = printmessage_1(&message, clnt);
 	if (result == (int *)NULL) {
 		/*
-                 * couldn't establish connection with
-                 * server. print error message and die.
-                 */
+         * couldn't establish connection with
+         * server. print error message and die.
+         */
 		clnt_perror(clnt, server);
 		exit(1);
 	}
