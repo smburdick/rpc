@@ -2,6 +2,7 @@
  * rprintmsg.c: remote version of "printmsg.c"
  */
 #include <stdio.h>
+#include <stdlib.h>
 #include "msg.h"
 
 int main(int argc, char *argv[])
@@ -27,7 +28,7 @@ int main(int argc, char *argv[])
 					PRINTMESSAGEVERS,
 					"visible");
 	if (clnt == (CLIENT *)NULL) {
-		/* 
+		/*
 		 * couldn't establish connection with
 		 * server. print error message and die.
 		 */
@@ -41,7 +42,7 @@ int main(int argc, char *argv[])
 	 */
 	result = printmessage_1(&message, clnt);
 	if (result == (int *)NULL) {
-		/* 
+		/*
                  * couldn't establish connection with
                  * server. print error message and die.
                  */
